@@ -12,7 +12,7 @@ function Products() {
         />
       )}
 
-      <div className="bg-red-500 h-full w-full justify-center flex">
+      <div className="bg-red-500 h-screen w-full justify-center flex">
         <div className="bg-green-700 w-screen pt-16 pl-64">
           <div className="py-8 px-12">
             <div className="flex mb-9">

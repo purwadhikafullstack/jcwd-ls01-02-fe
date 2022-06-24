@@ -1,5 +1,11 @@
-import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Dashboard from "../Admin/pages/Dashboard";
 import Login from "../Admin/pages/Login";
 import Orders from "../Admin/pages/Orders";
@@ -11,14 +17,22 @@ import NavbarAdmin from "../Admin/components/Navbar";
 
 function Admin() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === "/admin/") {
+      navigate("/admin");
+    }
+  }, []);
+
   return (
     <>
-      {location.pathname === "/login" ? null : <NavbarAdmin />}
-      {location.pathname === "/login" ? null : <LeftbarAdmin />}
+      {location.pathname === "/admin" ? null : <NavbarAdmin />}
+      {location.pathname === "/admin" ? null : <LeftbarAdmin />}
+
       <Routes>
         <Route path="" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="products" element={<Products />} />
         <Route path="products" element={<Products />} />
         <Route path="orders/:status" element={<Orders />} />
         <Route path="report" element={<Report />} />
