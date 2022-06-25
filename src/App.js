@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RegisterSuccess from "./Pages/RegisterSuccess";
 import Verification from "./Pages/Verification";
+import ResetPassword from "./Pages/ResetPassword";
 
 import Admin from "./Pages/Admin";
 
@@ -26,7 +27,8 @@ function App() {
   return (
     <>
       {location.pathname === "/login" ||
-      location.pathname === "/register" ? null : (
+      location.pathname === "/register" ||
+      location.pathname.match("/reset-password/") ? null : (
         <Navbar />
       )}
       <Routes>
@@ -44,11 +46,14 @@ function App() {
         <Route path="/prescription" element={<Prescription />} />
         <Route path="/myaccount" element={<Profile />} />
         <Route path="/verification/:token" element={<Verification />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+
         {/* Admin */}
         <Route path="/admin/*" element={<Admin />} />
       </Routes>
       {location.pathname === "/login" ||
-      location.pathname === "/register" ? null : (
+      location.pathname === "/register" ||
+      location.pathname.match("/reset-password/") ? null : (
         <Footer />
       )}
       <ToastContainer
