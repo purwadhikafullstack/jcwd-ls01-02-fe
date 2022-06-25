@@ -76,6 +76,7 @@ function SignUp() {
       setSubmitting(false);
     }
   };
+
   return (
     <div className="w-screen h-screen flex bg-white">
       <div className="w-1/2 h-full border border-black flex justify-center items-center relative">
