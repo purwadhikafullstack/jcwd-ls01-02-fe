@@ -12,6 +12,7 @@ module.exports = {
         putih: "#F0EDE7",
         biru: "#1F609E",
         hijau: "#3A7D44",
+        facebook: "#527BCB",
       },
     },
   },

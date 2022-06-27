@@ -13,6 +13,9 @@ import emailIcon from "../Assets/email-icon.png";
 import passwordIcon from "../Assets/password-icon.png";
 import signupImage from "../Assets/signup-image.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import facebookIcon from "../Assets/facebook-icon.png";
+import googleIcon from "../Assets/google-icon.png";
+import logoImage from "../Assets/logo-1.png";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -62,9 +65,12 @@ function SignUp() {
       console.log(res.data);
       dispatch({ type: "LOGIN", payload: res.data });
       Cookies.set("token", res.headers["x-token-access"]);
-      toast.success(`welcome ${values.username}`);
+      toast.success(`welcome ${values.username}`, {
+        theme: "colored",
+        style: { backgroundColor: "#009B90" },
+      });
       setTimeout(() => {
-        navigate("/home");
+        navigate("/unverified");
       }, 1000);
     } catch (error) {
       dispatch({
@@ -78,24 +84,30 @@ function SignUp() {
   };
   return (
     <div className="w-screen h-screen flex bg-white">
-      <div className="w-1/2 h-full border border-black flex justify-center items-center relative">
+      <div className="w-1/2 h-full flex justify-center items-center relative">
         <i
-          className="w-1/6 min-h-min border border-neutral-gray border-1 hover:bg-white cursor-pointer absolute left-10 top-10"
+          className="w-1/6 min-h-min  border-neutral-gray border-1 z-10 hover:bg-white cursor-pointer absolute left-10 top-10"
           onClick={() => navigate("/home")}
         >
-          Logo
+          <img src={logoImage} alt="" />
         </i>
-        <img src={signupImage} alt="" className="" />
+        <img
+          src={signupImage}
+          alt=""
+          className="h-full object-cover absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
       </div>
-      <div className="w-1/2 h-full border flex border-black">
+      <div className="w-1/2 h-full border flex shadow-2xl">
         <div className="bg-white h-5/6 w-5/6 m-auto flex flex-col items-center justify-center gap-y-5 py-10 container">
-          <div className="w-full min-h-min">Mari Kita Mulai Ya</div>
-          <div className="w-full min-h-min">
+          <div className="w-full min-h-min text-2xl font-bold">
+            Mari Kita Mulai Ya
+          </div>
+          <div className="w-full min-h-min text-neutral-gray">
             Sudah punya akun?{" "}
             <span>
               <Link
                 to="/login"
-                className="text-primary underline underline-offset-1"
+                className="text-primary underline underline-offset-2"
               >
                 Masuk
               </Link>
@@ -104,12 +116,38 @@ function SignUp() {
           <div className="w-full min-h-min flex flex-col gap-y-5">
             <div className="w-full h-1/2">
               <div className="w-full h-11 flex items-center gap-x-4">
-                <Button type="" buttonText="Google" className="" />
-                <Button type="" buttonText="Facebook" className="" />
+                <Button
+                  type="button"
+                  className="button-general outline-neutral-gray relative gap-x-3"
+                  buttonContent={
+                    <>
+                      <img
+                        src={googleIcon}
+                        alt=""
+                        className="h-5 aspect-square"
+                      />{" "}
+                      Daftar dengan Google
+                    </>
+                  }
+                />
+                <Button
+                  type="button"
+                  className="button-general bg-facebook text-white relative gap-x-3"
+                  buttonContent={
+                    <>
+                      <img
+                        src={facebookIcon}
+                        alt=""
+                        className="h-5 aspect-square"
+                      />{" "}
+                      Daftar dengan Facebook
+                    </>
+                  }
+                />
               </div>
             </div>
             <div className="w-full h-full relative flex justify-center items-center">
-              <div className="outline outline-1 outline-neutral-gray w-full absolute" />
+              <div className="border border-t-0 border-neutral-gray w-full absolute" />
               <div className="px-5 leading-none z-10 min-h-min bg-white">
                 atau
               </div>
@@ -259,9 +297,9 @@ function SignUp() {
                   </div>
                   <Button
                     type="submit"
-                    buttonText={isSubmitting ? "Loading.." : "Sign Up"}
+                    buttonContent={isSubmitting ? "Loading.." : "Sign Up"}
                     disabled={!isValid || isSubmitting}
-                    className="bg-primary text-white disabled:bg-gray-600 disabled:cursor-not-allowed text-sm leading-5"
+                    className="bg-primary text-white disabled:bg-gray-600 disabled:cursor-not-allowed text-sm leading-5 hover:bg-dark-primary"
                   />
                 </Form>
               );

@@ -56,7 +56,7 @@ const ForgotPasswordModal = (props) => {
       <Transition appear show={forgotPasswordModal} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-50 overflow-y-auto bg-black/50"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/60"
           onClose={forgotPasswordModalHandler}
         >
           <div className="min-h-screen px-4 text-center">
@@ -180,8 +180,7 @@ const ForgotPasswordModal = (props) => {
                 {succeed && (
                   <div className="text-center">
                     A reset password email has been sent to your email, please
-                    kindly check your email and click the link attached to the
-                    email to rest your password.
+                    check your email to reset your password.
                   </div>
                 )}
               </div>

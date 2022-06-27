@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import Button from "./Button";
+import logoImage from "../Assets/logo-1.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -15,12 +16,12 @@ function Navbar() {
     <div className="bg-white w-full h-20 flex justify-center items-center">
       {dropdown && <Dropdown dropdown={dropdown} setDropdown={setDropdown} />}
       <div className="container h-full flex justify-between items-center px-20 gap-x-6 lg:gap-x-16">
-        <div className="w-5/6 h-11 flex items-center gap-x-9">
+        <div className="w-5/6 h-11 flex items-center gap-x-9 ">
           <i
-            className="hidden lg:block w-1/6 h-full border border-neutral-gray border-1 hover:bg-white cursor-pointer"
+            className="hidden lg:block w-1/6 h-full border-neutral-gray border-1 hover:bg-white cursor-pointer mb-4"
             onClick={() => navigate("/home")}
           >
-            Logo
+            <img src={logoImage} alt="" />
           </i>
           <div className="w-full h-full">
             <input

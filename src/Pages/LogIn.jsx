@@ -11,6 +11,7 @@ import Button from "../Component/Button";
 import emailIcon from "../Assets/email-icon.png";
 import passwordIcon from "../Assets/password-icon.png";
 import signupImage from "../Assets/signup-image.png";
+import logoImage from "../Assets/logo-1.png";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import ForgotPasswordModal from "../Component/ForgotPasswordModal";
 
@@ -80,18 +81,22 @@ function LogIn() {
         />
       )}
       <div className="w-screen h-screen flex bg-white">
-        <div className="w-1/2 h-full border border-black flex justify-center items-center relative">
+        <div className="w-1/2 h-full border flex justify-center items-center relative">
           <i
-            className="w-1/6 min-h-min border border-neutral-gray border-1 hover:bg-white cursor-pointer absolute left-10 top-10"
+            className="w-1/6 min-h-min cursor-pointer absolute left-10 top-10"
             onClick={() => navigate("/home")}
           >
-            Logo
+            <img src={logoImage} alt="" className="outline-none" />
           </i>
-          <img src={signupImage} alt="" className="" />
+          <img
+            src={signupImage}
+            alt=""
+            className="h-full object-cover absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          />
         </div>
-        <div className="w-1/2 h-full border flex border-black">
+        <div className="w-1/2 h-full border flex shadow-2xl">
           <div className="bg-white h-5/6 w-5/6 m-auto flex flex-col items-center justify-center gap-y-5 py-10 container">
-            <div className="w-full min-h-min">Masuk</div>
+            <div className="w-full min-h-min text-2xl font-bold">Masuk</div>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -104,8 +109,6 @@ function LogIn() {
                   touched,
                   isSubmitting,
                   isValid,
-                  values,
-                  dirty,
                   handleBlur,
                 } = formik;
 
@@ -186,19 +189,20 @@ function LogIn() {
                     {/* T&C */}
                     <div className="w-full relative">
                       <input
-                        name="passwordConfirm"
-                        placeholder="confirm password"
+                        name="rememberme"
+                        placeholder="rememberme"
                         onChange={(e) => {
                           handleChange(e);
                         }}
                         onBlur={handleBlur}
                         type="checkbox"
-                        className={``}
                       />
                       <label htmlFor="" className="ml-3">
                         <span className="text-secondary">Ingat saya</span>
+                      </label>
+                      <label htmlFor="" className="ml-3 absolute">
                         <span
-                          className="text-neutral-gray cursor-pointer justify-between"
+                          className="text-neutral-gray cursor-pointer"
                           onClick={() => forgotPasswordModalHandler(true)}
                         >
                           Lupa Kata Sandi?
@@ -219,8 +223,18 @@ function LogIn() {
                         </div>
                       </div>
                     </div>
-                    <div className="w-full h-11 flex items-center gap-x-4">
-                      <Button type="Button" buttonText="Google" className="" />
+                    <Button
+                      type="Button"
+                      buttonText="Masuk dengan Google"
+                      className="outline-neutral-gray"
+                    />
+                    <div className="flex justify-center w-full -mt-2">
+                      <div>
+                        Belum Punya Akun?{" "}
+                        <span className="font-bold text-teal-600">
+                          <Link to="/register">Daftar</Link>
+                        </span>
+                      </div>
                     </div>
                   </Form>
                 );
