@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import API_URL from "../../../../Helpers/API_URL";
-import { categoryList } from "../../../../Helpers/categoryList";
 import Card from "../../Card";
-import CardCategory from "../../CardCategory";
 
 function PromoCarMobile() {
   const [data, setData] = useState([]);
@@ -22,7 +20,9 @@ function PromoCarMobile() {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
+
   if (loading) {
     return <>Loading....</>;
   }

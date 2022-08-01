@@ -90,6 +90,7 @@ function ProdCatCarousel({ category }) {
   };
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {

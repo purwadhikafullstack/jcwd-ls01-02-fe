@@ -8,7 +8,3 @@ const reducers = combineReducers({
 
 const middlewares = [thunk];
 export const store = createStore(reducers, applyMiddleware(...middlewares));
-
-store.subscribe(() => {
-  console.log("Store updated :", store.getState());
-});
