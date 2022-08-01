@@ -54,7 +54,6 @@ function LogIn() {
         email: values.personId,
         password: values.password,
       });
-      console.log(res.data.data);
       Cookies.set("token", res.headers["x-token-access"]);
       dispatch({ type: "LOGIN", payload: res.data.data });
       toast.success(`welcome back ${values.personId}`, {
@@ -62,10 +61,9 @@ function LogIn() {
         style: { backgroundColor: "#009B90" },
       });
       setTimeout(() => {
-        navigate("/home");
+        navigate("/");
       });
     } catch (error) {
-      console.log(error.response.data.message);
       dispatch({
         type: "ERROR",
         payload: error.response.data.message || "Network Error",

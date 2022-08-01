@@ -1,17 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import formatToCurrency from "../../Helpers/formatToCurrency";
-import { ChevronRightIcon } from "@heroicons/react/outline";
-import { paymentMethods } from "../../Helpers/paymentMethods";
-import { ChevronLeftIcon, XIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/solid";
 import API_URL from "../../Helpers/API_URL";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
 function ModalPaymentProof(props) {
-  const navigate = useNavigate();
   const photoRef = useRef();
   const initialStateImage = { file: null, filePreview: null };
   const [selectedImage, setSelectedImage] = useState(initialStateImage);
@@ -59,7 +54,6 @@ function ModalPaymentProof(props) {
         id,
         transaction_code,
       };
-      console.log(insertData);
       setSubmitClicked(true);
       if (!selectedImage.file || errorType) {
         return;

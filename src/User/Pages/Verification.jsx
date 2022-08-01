@@ -34,7 +34,7 @@ function Verification() {
           authorization: `${token} verif`,
         },
       });
-      dispatch({ type: "LOGIN", payload: res.data });
+      dispatch({ type: "LOGIN", payload: res.data.data });
       setVerification(true);
       setTimer(10);
     } catch (error) {

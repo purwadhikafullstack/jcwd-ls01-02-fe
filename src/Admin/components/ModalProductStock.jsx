@@ -44,7 +44,6 @@ function ModalProductStock(props) {
       const res = await axios.get(`${API_URL}/admin/product-stock`, {
         params: { terms, page, limit, order },
       });
-      console.log(res);
       setProductStock(res.data.data.productStock);
       setTotal(res.data.data.total);
       setTotalPages(() => Math.ceil(res.data.data.total / limit));
@@ -84,7 +83,6 @@ function ModalProductStock(props) {
     for (let i = 0; i < buttonsTotal; i++) {
       pages.push("");
     }
-    console.log({ buttonsTotal });
     return pages.map((val, i) => {
       return (
         <button

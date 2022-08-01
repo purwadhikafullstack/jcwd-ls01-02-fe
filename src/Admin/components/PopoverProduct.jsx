@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Popover } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { DotsVerticalIcon } from "@heroicons/react/outline";
@@ -10,11 +10,9 @@ import { toast } from "react-toastify";
 
 function PopoverProduct(props) {
   const { openModalEditOptions, id, setEditId, getProducts } = props;
-  const [deleteProduct, setDeleteProduct] = useState([]);
 
   const deleteSubmit = async (id) => {
     try {
-      console.log(id);
       await axios.delete(`${API_URL}/admin/delete-product?id=${id}`);
       toast.success(`Produk berhasil dihapus`, {
         theme: "colored",

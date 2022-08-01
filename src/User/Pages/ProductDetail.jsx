@@ -182,11 +182,7 @@ function ProductDetail() {
               <div className="hidden sm:flex gap-x-4 h-11">
                 <button
                   className="button-outline w-40 text-sm flex gap-x-2"
-                  onClick={() => {
-                    isLogin
-                      ? console.log(`tambah ke keranjang sebanyak ${qty}`)
-                      : navigate("/login");
-                  }}
+                  onClick={() => (isLogin ? "" : navigate("/login"))}
                 >
                   <img
                     src={tambahKeranjangIcon}

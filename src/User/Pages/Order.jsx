@@ -33,10 +33,6 @@ function Order() {
     } catch (error) {
       console.log(error);
       setError(true);
-      // toast.error(error.response.data.message, {
-      //   theme: "colored",
-      //   style: { backgroundColor: "#DC2626" },
-      // });
       setTimer(5);
     } finally {
       setLoading(false);
@@ -49,7 +45,6 @@ function Order() {
 
   const printPage = (data) => {
     let { status } = data.dataOrder;
-    // status = true;
     switch (status) {
       case "Pengecekan-Resep":
         return <PengecekanResep data={data} />;

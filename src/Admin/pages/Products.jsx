@@ -145,8 +145,8 @@ function Products() {
                 <button
                   className="button-primary h-8 w-full"
                   onClick={() => {
-                    openModalDetails();
                     setDetailsId(val.id);
+                    openModalDetails();
                   }}
                 >
                   Detail Produk

@@ -27,8 +27,6 @@ function Profile() {
   const dispatch = useDispatch();
   const avaRef = useRef();
   const navigate = useNavigate();
-  // const { id, username, email, profile_picture, verified, fullname } =
-  //   useSelector((state) => state.user);
   const params = useParams();
   const { tab } = params;
   let {
@@ -75,7 +73,6 @@ function Profile() {
           params: { sinceDate, toDate, page, limit, order },
         }
       );
-      console.log(res);
       setData(res.data.data.orders);
       setTotal(res.data.data.total);
       setTotalPages(() => Math.ceil(res.data.data.total / limit));
@@ -103,7 +100,6 @@ function Profile() {
     for (let i = 0; i < buttonsTotal; i++) {
       pages.push("");
     }
-    console.log({ buttonsTotal });
     return pages.map((val, i) => {
       return (
         <button
@@ -125,7 +121,6 @@ function Profile() {
 
   useEffect(() => {
     const currentParams = Object.fromEntries([...searchParams]);
-    console.log(currentParams);
   }, [searchParams]);
 
   useEffect(() => {
@@ -174,7 +169,6 @@ function Profile() {
   useEffect(() => {
     if (!isLogin) navigate("/");
     if (isLogin && !verified) return navigate("/unverified");
-    console.log("object");
     // eslint-disable-next-line
   }, [isLogin]);
 
@@ -268,9 +262,7 @@ function Profile() {
                           className="hidden"
                           onClick={(event) => (event.target.value = null)}
                           onChange={(event) => {
-                            console.log("event :", event.target.files[0]);
                             if (event.target.files[0]) {
-                              console.log("event :", event.target.files[0]);
                               let format =
                                 event.target.files[0].name.split(".");
                               format = format[format.length - 1];
@@ -629,7 +621,7 @@ function Profile() {
       <div className="h-full w-full bg-white flex justify-center pt-20">
         <div className="container h-full flex px-24 py-14 gap-x-11">
           <div className="w-80 bg-white flex flex-col px-10">
-            <div className="w-full h-20 flex items-center">Jane Doe</div>
+            <div className="w-full h-20 flex items-center">{username}</div>
             <button
               className="w-full h-20 flex items-center border border-1 btn-plain"
               onClick={() => navigate("/myaccount/profile")}

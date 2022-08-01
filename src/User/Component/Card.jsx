@@ -10,21 +10,16 @@ import { toast } from "react-toastify";
 import defaultProduct from "../../Assets/default-product.png";
 
 function Card({ data, imgStyling }) {
-  // console.log(data);
   const { isLogin } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const link = data.name.split(" ").join("_");
-  // const [products, setProducts] = useState([]);
-  // const [quantity, setQuantity] = useState(1);
-  // const token = localStorage.getItem("token");
   const params = useParams();
   const productId = params.id;
 
   const addtoCart = async () => {
     try {
       let token = Cookies.get("token");
-      // console.log(token);
       let res = await axios.post(
         `${API_URL}/transaction/addtocart`,
         {
@@ -42,7 +37,6 @@ function Card({ data, imgStyling }) {
         type: "ADDTOCART",
         payload: res.data.data,
       });
-      console.log(res, ">>>>>>>>>>> RESPON DATA RES");
     } catch (error) {
       console.log(error);
     } finally {

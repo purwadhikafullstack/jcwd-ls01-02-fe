@@ -42,7 +42,6 @@ function Orders() {
           params: { terms, sinceDate, toDate, page, limit, order },
         }
       );
-      console.log(res);
       setData(res.data.data.orders);
       setTotal(res.data.data.total);
       setTotalPages(() => Math.ceil(res.data.data.total / limit));
@@ -88,8 +87,6 @@ function Orders() {
       );
     });
   };
-
-  console.log(sinceDate);
 
   useEffect(() => {
     setSinceDate("");

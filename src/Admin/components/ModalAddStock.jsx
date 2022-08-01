@@ -37,7 +37,6 @@ function ModalAddStock(props) {
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
     const insertData = {
       product_id: editId,
       stock: values.stock,
@@ -67,7 +66,6 @@ function ModalAddStock(props) {
       });
       const { name, no_produk } = res.data.data;
       setData({ name, no_produk });
-      console.log(res.data.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -135,7 +133,6 @@ function ModalAddStock(props) {
                       touched,
                       values,
                     } = formik;
-                    console.log(values);
                     return (
                       <Form>
                         {loading ? (

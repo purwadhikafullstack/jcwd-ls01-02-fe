@@ -1,10 +1,9 @@
 import React from "react";
 import tambahKeranjangIcon from "../../Assets/tambah-keranjang-icon.png";
 import { HeartIcon } from "@heroicons/react/outline";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 function BotBarDetailsMobile() {
-  const location = useLocation();
   const navigate = useNavigate();
   const { isLogin } = useSelector((state) => state.user);
 
@@ -15,9 +14,7 @@ function BotBarDetailsMobile() {
       </button>
       <button
         className="button-outline aspect-square text-sm flex gap-x-2"
-        onClick={() => {
-          isLogin ? console.log(`tambah ke keranjang `) : navigate("/login");
-        }}
+        onClick={() => (isLogin ? null : navigate("/login"))}
       >
         <img src={tambahKeranjangIcon} alt="" className="h-full " />{" "}
       </button>

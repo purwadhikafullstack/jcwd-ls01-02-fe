@@ -12,7 +12,6 @@ function CardCart({ data }) {
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const { cart, value } = useSelector((state) => state.user);
-  // console.log(cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -50,7 +49,6 @@ function CardCart({ data }) {
       const res = await axios.patch(`${API_URL}/transaction/editquantity`, {
         headers: { authorization: token },
       });
-      console.log(res, "RESPONNNN EDITT QUANTITY>>>>>>>>>>>>>>>");
     } catch (error) {
       console.log(error);
     } finally {
