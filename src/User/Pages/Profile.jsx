@@ -188,6 +188,7 @@ function Profile() {
     };
 
     formData.append("data", JSON.stringify(dataInput));
+    console.log(dataInput);
     try {
       setChanged(false);
       setloadingSubmit(true);

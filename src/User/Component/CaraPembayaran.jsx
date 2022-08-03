@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 
-function CaraPembayaran({ data }) {
+function CaraPembayaran({ data, name }) {
   const [disclosure, setDisclosure] = useState(false);
   return (
     <div
@@ -31,12 +31,12 @@ function CaraPembayaran({ data }) {
       >
         <div className="p-5">
           <ol className="list-decimal ml-5">
-            <li>Masukkan Kartu ATM BCA & PIN.</li>
-            <li>{`Pilih menu Transaksi Lainnya > Transfer > ke Rekening BCA Virtual Account.`}</li>
+            <li>{`Masukkan Kartu ATM ${name} & PIN.`}</li>
+            <li>{`Pilih menu Transaksi Lainnya > Transfer > ke Rekening ${name} Virtual Account.`}</li>
             <li>
-              Masukkan 5 angka kode perusahaan untuk Tokopedia (80777) dan Nomor
-              HP yang kamu daftarkan di akun Tokopedia (Contoh:
-              80777081316951940).
+              Masukkan 5 angka kode perusahaan untuk HealthyMed (80123) dan
+              Nomor HP yang kamu daftarkan di akun HealthyMed (Contoh:
+              80123081316951940).
             </li>
             <li>
               Di halaman konfirmasi, pastikan detil pembayaran sudah sesuai

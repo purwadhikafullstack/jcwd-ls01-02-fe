@@ -140,7 +140,7 @@ function Login() {
                       ) : null}
                     </div>
 
-                    <div className="mb-3">
+                    <div className="mb-3 relative">
                       <div className="w-9 h-5 mb-1">Password</div>
                       <input
                         className={
@@ -165,7 +165,7 @@ function Login() {
                       />
                       <button
                         type="button"
-                        className="h-6 w-6 absolute right-32 top-[338px] text-secondary rounded-full flex justify-center items-center hover:bg-neutral-gray"
+                        className="h-6 w-6 absolute right-5 top-8 text-secondary rounded-full flex justify-center items-center hover:bg-neutral-gray"
                         onClick={() => setVisible(!visible)}
                       >
                         {visible ? (

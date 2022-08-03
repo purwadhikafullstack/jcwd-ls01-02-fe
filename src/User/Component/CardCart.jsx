@@ -25,7 +25,7 @@ function CardCart({ data }) {
           headers: { authorization: token },
         }
       );
-      dispatch({ type: "DELETECART", payload: id });
+      dispatch({ type: "DELETECART", payload: res.data.data });
       toast.success("Product berhasil dihapus!", {
         theme: "colored",
         position: "top-center",

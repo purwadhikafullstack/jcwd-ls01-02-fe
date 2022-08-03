@@ -18,6 +18,7 @@ function PopoverProduct(props) {
         theme: "colored",
         style: { backgroundColor: "#009B90" },
       });
+      getProducts();
     } catch (error) {
       console.log(error);
     }

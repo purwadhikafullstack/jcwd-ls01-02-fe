@@ -13,6 +13,7 @@ function ModalPaymentProof(props) {
   const [loading, setLoading] = useState(false);
   const [submitClicked, setSubmitClicked] = useState(false);
   const [errorType, setErrorType] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState("");
 
   const {
     isOpen,
@@ -22,7 +23,6 @@ function ModalPaymentProof(props) {
     transaction_code,
     getOrderDetails,
   } = props;
-  console.log({ checkoutCart, id, transaction_code });
 
   const onClose = () => {
     closeModal();
@@ -36,6 +36,11 @@ function ModalPaymentProof(props) {
     if (
       !["jpg", "jpeg", "JPG", "JPEG", "png"].includes(type[type.length - 1])
     ) {
+      setErrorMessage("Format yang kamu pilih tidak terdukung");
+      setSelectedImage({
+        file: null,
+        filePreview: null,
+      });
       return setErrorType(true);
     }
     setErrorType(false);
@@ -55,12 +60,12 @@ function ModalPaymentProof(props) {
         id,
         transaction_code,
       };
-      console.log(insertData);
       if (errorType) {
         return;
       }
       setSubmitClicked(true);
       if (!selectedImage.file) {
+        setErrorMessage("Kamu belum memilih foto");
         return;
       }
       setLoading(true);
@@ -160,14 +165,9 @@ function ModalPaymentProof(props) {
                   >
                     {selectedImage.filePreview ? "Ganti Foto" : "Pilih Foto"}
                   </button>
-                  {!selectedImage?.file && submitClicked ? (
+                  {(!selectedImage?.file && submitClicked) || errorType ? (
                     <span className="text-red-600 absolute bottom-0">
-                      Kamu belum memilih foto
-                    </span>
-                  ) : null}
-                  {errorType ? (
-                    <span className="text-red-600 absolute bottom-0">
-                      Format yang kamu pilih tidak terdukung
+                      {ErrorMessage}
                     </span>
                   ) : null}
                 </div>

@@ -16,7 +16,9 @@ function AddImage(props) {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [selectedImage, setSelectedImage] = useState(photo);
   const [submitClicked, setSubmitClicked] = useState(false);
-  const [errorMessage, seterrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorType, setErrorType] = useState(false);
+
   const onCropChange = (crop) => {
     setCrop(crop);
   };
@@ -28,7 +30,21 @@ function AddImage(props) {
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
+
   const onFileChange = (e) => {
+    const type = e.target.files[0].name.split(".");
+    if (
+      !["jpg", "jpeg", "JPG", "JPEG", "png"].includes(type[type.length - 1])
+    ) {
+      setErrorMessage("Format yang kamu pilih tidak terdukung");
+      setSelectedImage({
+        file: null,
+        filePreview: null,
+      });
+      return setErrorType(true);
+    }
+    setErrorType(false);
+
     setSubmitClicked(false);
     setCrop(initialCrop);
     setZoom(1);
@@ -42,13 +58,12 @@ function AddImage(props) {
 
   const onSubmit3 = async (data) => {
     try {
-      seterrorMessage("");
-      setSubmitClicked(true);
-      if (!selectedImage.filePreview) {
-        throw Object.assign(new Error("Wajib unggah gambar produk"));
+      if (errorType) {
+        return;
       }
+      setSubmitClicked(true);
       if (!selectedImage.file) {
-        setModalState(4);
+        setErrorMessage("Kamu belum memilih foto");
         return;
       }
       setLoading(true);
@@ -61,7 +76,6 @@ function AddImage(props) {
       setModalState(4);
     } catch (error) {
       console.log(error);
-      seterrorMessage(error.message);
       toast.error(error.message, {
         theme: "colored",
         style: { backgroundColor: "#DC2626" },
@@ -142,7 +156,7 @@ function AddImage(props) {
         ""
       ) : (
         <div className="w-full flex justify-end h-20 items-center gap-x-5">
-          {errorMessage && submitClicked ? (
+          {(!selectedImage?.file && submitClicked) || errorType ? (
             <span className="text-red-600">{errorMessage}</span>
           ) : null}
           <div

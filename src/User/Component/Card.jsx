@@ -52,14 +52,6 @@ function Card({ data, imgStyling }) {
         className="btn-plain rounded-full p-2 border flex justify-center items-center bg-white absolute right-3 shadow-md hover:shadow-primary/50 hover:bg-white"
         onClick={(e) => {
           e.stopPropagation();
-          // if (isLogin) {
-          //   console.log("liked");
-          // } else {
-          //   toast.error("Silahkan Log In terlebih dahulu!", {
-          //     theme: "colored",
-          //   });
-          //   navigate("/login");
-          // }
         }}
       >
         <HeartIcon className="text-neutral-gray h-5 sm:h-8" />

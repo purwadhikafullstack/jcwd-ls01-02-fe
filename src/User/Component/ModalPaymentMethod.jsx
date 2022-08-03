@@ -26,7 +26,6 @@ function ModalPaymentMethod(props) {
     transaction_code,
   } = props;
 
-  console.log({ checkoutCart });
   const onClose = () => {
     setModalPaymentMethod(false);
   };
