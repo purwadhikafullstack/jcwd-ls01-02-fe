@@ -60,6 +60,10 @@ function Prescription() {
         type: "ERROR",
         payload: error.response.data.message || "Network Error",
       });
+      toast.error(error.response.data.message, {
+        theme: "colored",
+        style: { backgroundColor: "#EB1D36" },
+      });
     }
   };
   useEffect(() => {

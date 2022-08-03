@@ -1,12 +1,14 @@
 import { ClockIcon } from "@heroicons/react/outline";
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import chatIcon from "../../Assets/chat-icon.png";
 import transaksiActiveIcon from "../../Assets/transaksi-admin-active.png";
 import API_URL from "../../Helpers/API_URL";
 import { fullDateGenerator } from "../../Helpers/dateGenerator";
 
 function CardOrderUser({ data, getOrders }) {
+  const navigate = useNavigate();
   const [checked, setChecked] = useState(false);
   const [status, setStatus] = useState(data.status);
   const [isOpen, setIsOpen] = useState(false);
@@ -46,12 +48,17 @@ function CardOrderUser({ data, getOrders }) {
             <span className="font-bold -ml-10">{data.transaction_code}</span>
           </div>
           <div className="flex h-8 justify-between items-center mt-10">
-            <div className="h-full flex gap-x-5 ">
-              <button className="button-outline rounded-full flex gap-x-2 text-sm px-5">
-                <img src={chatIcon} alt="" className="h-full scale-125" />
-                <span>Chat Pembeli</span>
-              </button>
-            </div>
+            <button className="button-outline rounded-full flex gap-x-2 text-sm px-5">
+              <img src={chatIcon} alt="" className="h-5 " />
+              <span>Chat Costumer Service</span>
+            </button>
+
+            <button
+              className="button-primary rounded-full flex gap-x-2 text-sm px-5"
+              onClick={() => navigate(`/order?id=${data.transaction_code}`)}
+            >
+              <span>Detail Pesanan</span>
+            </button>
           </div>
         </div>
       </div>

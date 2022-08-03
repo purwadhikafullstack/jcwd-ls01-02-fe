@@ -183,8 +183,8 @@ function Profile() {
       username: values.username,
       fullname: values.fullname,
       gender: values.gender,
-      address: values.address,
-      age: values.age,
+      // address: values.address,
+      bod: values.age,
     };
 
     formData.append("data", JSON.stringify(dataInput));
@@ -393,6 +393,11 @@ function Profile() {
                             type="text"
                             placeholder="Jl. Meruya No. 9 Kembangan Jakarta Barat"
                             className={`field-input w-full h-10 `}
+                            onChange={(e) => {
+                              setChanged(true);
+                              handleChange(e);
+                            }}
+                            value={values.address}
                           />
                           <div className="w-full flex gap-x-5">
                             <div className="w-2/4">
@@ -402,11 +407,23 @@ function Profile() {
                                 type="date"
                                 placeholder=""
                                 className={`field-input w-full h-10 mr-5 `}
+                                onChange={(e) => {
+                                  setChanged(true);
+                                  handleChange(e);
+                                }}
+                                value={values.age}
                               />
                             </div>
                             <div className="w-2/4">
                               <div className="mt-3">Gender</div>
-                              <select className="field-input w-full h-10 bg-white rounded-lg">
+                              <select
+                                className="field-input w-full h-10 bg-white rounded-lg"
+                                onChange={(e) => {
+                                  setChanged(true);
+                                  handleChange(e);
+                                }}
+                                value={values.gender}
+                              >
                                 <option value="">All</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
