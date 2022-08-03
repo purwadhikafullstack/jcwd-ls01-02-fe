@@ -15,12 +15,15 @@ function PopoverProduct(props) {
   const deleteSubmit = async (id) => {
     try {
       console.log(id);
-      await axios.delete(`${API_URL}/admin/delete-product?id=${id}`);
+      const res = await axios.delete(
+        `${API_URL}/admin/delete-product?id=${id}`
+      );
+      console.log(res);
+      // let data = res.data.data[0]
       toast.success(`Produk berhasil dihapus`, {
         theme: "colored",
         style: { backgroundColor: "#009B90" },
       });
-      getProducts();
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +62,6 @@ function PopoverProduct(props) {
                   className="btn-plain rounded-full h-8 aspect-square border flex justify-center items-center border-primary/20 hover:bg-primary/20"
                   onClick={() => {
                     deleteSubmit(id);
-                    getProducts();
                   }}
                 >
                   <img src={trashIcon} alt="" className="h-5" />

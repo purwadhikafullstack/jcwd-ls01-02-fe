@@ -6,6 +6,7 @@ import transaksiActiveIcon from "../../Assets/transaksi-admin-active.png";
 import API_URL from "../../Helpers/API_URL";
 import { fullDateGenerator } from "../../Helpers/dateGenerator";
 import ModalPrescriptionService from "./ModalPrescriptionService";
+import { toast } from "react-toastify";
 
 function CardOrderAdmin({ data, getOrders }) {
   const [checked, setChecked] = useState(false);
@@ -31,13 +32,24 @@ function CardOrderAdmin({ data, getOrders }) {
   const cancelOrder = async (id) => {
     try {
       await axios.patch(`${API_URL}/transaction/order/reject?id=${id}`);
+      toast.success(`Pesanan Dibatalkan`, {
+        theme: "colored",
+        style: { backgroundColor: "#009B90" },
+      });
     } catch (error) {
       console.log(error);
     }
   };
+
   const confirmlOrder = async (id) => {
     try {
-      await axios.patch(`${API_URL}/transaction/order/confirm?id=${id}`);
+      await axios.patch(`${API_URL}/transaction/order/confirm`, {
+        transaction_code,
+      });
+      toast.success(`Pesanan Berhasil Dikonfirmasi`, {
+        theme: "colored",
+        style: { backgroundColor: "#009B90" },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -161,7 +173,7 @@ function CardOrderAdmin({ data, getOrders }) {
                   {status == "Diproses" && (
                     <button
                       className="button-primary w-1/2"
-                      onClick={() => confirmlOrder(id)}
+                      onClick={() => confirmlOrder()}
                     >
                       Terima Pesanan
                     </button>

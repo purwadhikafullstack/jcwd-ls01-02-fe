@@ -97,6 +97,7 @@ function Products() {
         },
       });
       setProducts(res.data.data.products);
+      console.log(res.data.data.products);
       setTotal(res.data.data.total);
       setTotalPages(() => Math.ceil(res.data.data.total / limit));
       // setMinPage(0);
