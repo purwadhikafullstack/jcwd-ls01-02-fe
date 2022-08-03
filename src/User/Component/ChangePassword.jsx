@@ -37,7 +37,7 @@ function ChangePassword({ changePassword, setChangePassword }) {
       .required("Passwords do not match"),
   });
 
-  const onSubmit = async (values, onSubmit) => {
+  const onSubmit1 = async (values, { setSubmitting }) => {
     try {
       console.log("Password jalan!<<<<<<<>>>>>>>");
       let token = Cookies.get("token");
@@ -46,7 +46,6 @@ function ChangePassword({ changePassword, setChangePassword }) {
         {
           oldPassword: values.oldPassword,
           newPassword: values.newPassword,
-          confirmationPassword: values.confirmationPassword,
         },
         {
           headers: {
@@ -68,7 +67,7 @@ function ChangePassword({ changePassword, setChangePassword }) {
         payload: error.response.data.message || "Network Error",
       });
     } finally {
-      onSubmit.setSubmitting(false);
+      setSubmitting(false);
     }
   };
 
@@ -96,7 +95,7 @@ function ChangePassword({ changePassword, setChangePassword }) {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={onSubmit}
+          onSubmit={onSubmit1}
         >
           {(formik) => {
             const { handleChange, errors, touched, isValid, handleBlur } =
@@ -229,7 +228,6 @@ function ChangePassword({ changePassword, setChangePassword }) {
                     className="border border-teal-500 hover:bg-teal-500 w-32 h-8 rounded-md"
                     type="submit"
                     disabled={!isValid || !changed}
-                    onClick={onSubmit}
                   >
                     Lanjutkan
                   </button>

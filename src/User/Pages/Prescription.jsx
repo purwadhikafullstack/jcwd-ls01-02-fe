@@ -24,33 +24,8 @@ function Prescription() {
     file: [],
     filePreview: null,
   });
-  // const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
-  //   useDropzone({
-  //     accept: {
-  //       "image/jpeg": [],
-  //       "image/png": [],
-  //     },
-  //   });
-
-  // const acceptedFileItems = acceptedFiles.map((file) => (
-  //   <li key={file.path}>
-  //     {file.path} - {file.size} bytes
-  //   </li>
-  // ));
-
-  // const fileRejectionItems = fileRejections.map(({ file, errors }) => (
-  //   <li key={file.path}>
-  //     {file.path} - {file.size} bytes
-  //     <ul>
-  //       {errors.map((e) => (
-  //         <li key={e.code}>{e.message}</li>
-  //       ))}
-  //     </ul>
-  //   </li>
-  // ));
 
   const onFileChange = (e) => {
-    console.log(e.target.files[0]);
     if (e.target && e.target.files[0]) {
       setselectedImage({
         ...selectedImage,
@@ -84,6 +59,10 @@ function Prescription() {
       dispatch({
         type: "ERROR",
         payload: error.response.data.message || "Network Error",
+      });
+      toast.error(error.response.data.message, {
+        theme: "colored",
+        style: { backgroundColor: "#EB1D36" },
       });
     }
   };
@@ -132,34 +111,6 @@ function Prescription() {
             <div className="w-full ">
               Unggah Resep Dokter
               <div className="w-full h-[400px] rounded-xl px-6 border-dashed border-4 bg-white border-grey mt-5">
-                {/* <div className="flex justify-center mt-20 text-xl">
-                      Tarik & Letakan File
-                    </div> */}
-                {/* <div className="w-full min-h-min flex flex-col gap-y-5 mt-10">
-                      <div className="w-full h-full relative flex justify-center items-center">
-                        <div className="outline outline-1 outline-neutral-gray w-[150px] absolute" />
-                        <div className="px-5 leading-none z-10 min-h-min bg-cyan-50">
-                          atau
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-center mt-10 ">
-                      <button className="h-10 w-20 border border-green-800 hover:bg-green-800">
-                        Unggah
-                      </button>
-                    </div> */}
-                {/* 
-                <div {...getRootProps({ className: "dropzone" })}>
-                  <input {...getInputProps()} />
-                  <p>Drag 'n' drop some files here, or click to select files</p>
-                  <em>(Only *.jpeg and *.png images will be accepted)</em>
-                </div>
-                <aside>
-                  <h4>Accepted files</h4>
-                  <ul>{acceptedFileItems}</ul>
-                  <h4>Rejected files</h4>
-                  <ul>{fileRejectionItems}</ul>
-                </aside> */}
                 <div className="w-1/3 aspect-square overflow-hidden items-center ml-80">
                   {selectedImage.filePreview ? (
                     <img

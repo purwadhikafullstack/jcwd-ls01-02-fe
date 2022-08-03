@@ -97,7 +97,6 @@ function Checkout() {
           params: { transaction_code },
         }
       );
-      console.log(res.data.data);
       const { status, id, cartData, checkoutCart, totalBerat } = res.data.data;
       if (status !== "Pesanan-Diterima") {
         navigate("/");

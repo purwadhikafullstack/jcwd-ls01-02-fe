@@ -61,8 +61,6 @@ function ModalAddProduct(props) {
       let formData = new FormData();
       formData.append("product_photo", detailImage.photo.file);
       formData.append("data", JSON.stringify(insertData));
-
-      console.log(insertData);
       await axios.post(`${API_URL}/admin/new-product`, formData);
       toast.success(`Produk berhasil ditambahkan`, {
         theme: "colored",

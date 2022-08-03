@@ -1,23 +1,19 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import formatToCurrency from "../../Helpers/formatToCurrency";
-import { ChevronRightIcon } from "@heroicons/react/outline";
-import { paymentMethods } from "../../Helpers/paymentMethods";
-import { ChevronLeftIcon, XIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/solid";
 import API_URL from "../../Helpers/API_URL";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
 function ModalPaymentProof(props) {
-  const navigate = useNavigate();
   const photoRef = useRef();
   const initialStateImage = { file: null, filePreview: null };
   const [selectedImage, setSelectedImage] = useState(initialStateImage);
   const [loading, setLoading] = useState(false);
   const [submitClicked, setSubmitClicked] = useState(false);
   const [errorType, setErrorType] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState("");
 
   const {
     isOpen,
@@ -40,6 +36,11 @@ function ModalPaymentProof(props) {
     if (
       !["jpg", "jpeg", "JPG", "JPEG", "png"].includes(type[type.length - 1])
     ) {
+      setErrorMessage("Format yang kamu pilih tidak terdukung");
+      setSelectedImage({
+        file: null,
+        filePreview: null,
+      });
       return setErrorType(true);
     }
     setErrorType(false);
@@ -59,12 +60,12 @@ function ModalPaymentProof(props) {
         id,
         transaction_code,
       };
-      console.log(insertData);
       if (errorType) {
         return;
       }
       setSubmitClicked(true);
       if (!selectedImage.file) {
+        setErrorMessage("Kamu belum memilih foto");
         return;
       }
       setLoading(true);
@@ -164,14 +165,9 @@ function ModalPaymentProof(props) {
                   >
                     {selectedImage.filePreview ? "Ganti Foto" : "Pilih Foto"}
                   </button>
-                  {!selectedImage?.file && submitClicked ? (
+                  {(!selectedImage?.file && submitClicked) || errorType ? (
                     <span className="text-red-600 absolute bottom-0">
-                      Kamu belum memilih foto
-                    </span>
-                  ) : null}
-                  {errorType ? (
-                    <span className="text-red-600 absolute bottom-0">
-                      Format yang kamu pilih tidak terdukung
+                      {ErrorMessage}
                     </span>
                   ) : null}
                 </div>

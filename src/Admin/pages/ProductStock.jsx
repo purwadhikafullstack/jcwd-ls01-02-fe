@@ -36,7 +36,6 @@ function ProductStock() {
       const res = await axios.get(`${API_URL}/admin/product-stock`, {
         params: { terms, page, limit, order },
       });
-      console.log(res.data.data.products);
       setProducts(res.data.data.products);
       setTotal(res.data.data.total);
       setTotalPages(() => Math.ceil(res.data.data.total / limit));

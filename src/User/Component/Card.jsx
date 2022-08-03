@@ -10,21 +10,16 @@ import { toast } from "react-toastify";
 import defaultProduct from "../../Assets/default-product.png";
 
 function Card({ data, imgStyling }) {
-  // console.log(data);
   const { isLogin } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const link = data.name.split(" ").join("_");
-  // const [products, setProducts] = useState([]);
-  // const [quantity, setQuantity] = useState(1);
-  // const token = localStorage.getItem("token");
   const params = useParams();
   const productId = params.id;
 
   const addtoCart = async () => {
     try {
       let token = Cookies.get("token");
-      // console.log(token);
       let res = await axios.post(
         `${API_URL}/transaction/addtocart`,
         {
@@ -42,7 +37,6 @@ function Card({ data, imgStyling }) {
         type: "ADDTOCART",
         payload: res.data.data,
       });
-      console.log(res, ">>>>>>>>>>> RESPON DATA RES");
     } catch (error) {
       console.log(error);
     } finally {
@@ -58,14 +52,6 @@ function Card({ data, imgStyling }) {
         className="btn-plain rounded-full p-2 border flex justify-center items-center bg-white absolute right-3 shadow-md hover:shadow-primary/50 hover:bg-white"
         onClick={(e) => {
           e.stopPropagation();
-          // if (isLogin) {
-          //   console.log("liked");
-          // } else {
-          //   toast.error("Silahkan Log In terlebih dahulu!", {
-          //     theme: "colored",
-          //   });
-          //   navigate("/login");
-          // }
         }}
       >
         <HeartIcon className="text-neutral-gray h-5 sm:h-8" />

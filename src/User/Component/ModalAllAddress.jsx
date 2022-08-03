@@ -86,7 +86,6 @@ function ModalAllAddress(props) {
       const res = await axios.get(`${API_URL}/profile/all-addresses`, {
         headers: { authorization: token },
       });
-      console.log(res.data.data);
       setDataAddresses(res.data.data);
     } catch (error) {
       console.log(error);

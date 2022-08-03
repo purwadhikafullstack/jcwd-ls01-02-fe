@@ -122,8 +122,9 @@ function MenungguPembayaran({ data, getOrderDetails }) {
   };
 
   const printCaraPembayaran = () => {
-    return payment.list.map((val, i) => {
-      return <CaraPembayaran data={val} key={i} />;
+    const { name, list } = payment;
+    return list.map((val, i) => {
+      return <CaraPembayaran data={val} name={name} key={i} />;
     });
   };
 

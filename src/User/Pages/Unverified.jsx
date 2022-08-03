@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
@@ -46,6 +46,7 @@ function Unverified() {
 
   useEffect(() => {
     if (verified || !isLogin) navigate("/");
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -25,6 +25,7 @@ function ProdCatCarMobile({ category }) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
   if (loading) {
     return <>Loading....</>;

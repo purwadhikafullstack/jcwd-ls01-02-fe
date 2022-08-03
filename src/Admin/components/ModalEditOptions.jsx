@@ -8,7 +8,6 @@ function ModalEditOptions(props) {
     closeModalEditOptions,
     openModalEdit,
     openModalAddStock,
-    editId,
     setEditId,
   } = props;
 

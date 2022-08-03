@@ -18,7 +18,6 @@ function EditAddress(props) {
     loadingAllAddress,
     setLoadingAllAddress,
   } = props;
-  console.log(data);
   const {
     id,
     alamat,
@@ -101,7 +100,6 @@ function EditAddress(props) {
       setLoadingAllAddress(true);
       let token = Cookies.get("token");
       let insertData = { ...values, id };
-      console.log({ values });
       const res = await axios.patch(
         `${API_URL}/profile/edit-address`,
         insertData,
@@ -114,15 +112,11 @@ function EditAddress(props) {
         style: { backgroundColor: "#009B90" },
       });
       if (res.data.data?.primary) {
-        console.log("ada primary");
-        console.log(res);
         dispatch({
           type: "CHANGEADDRESS",
           payload: res.data.data?.primary,
         });
-        console.log("ubah ada primary");
       }
-      console.log(res.data.data);
       setDataAddresses(res.data.data.addresses);
       switchModal();
     } catch (error) {
@@ -162,7 +156,6 @@ function EditAddress(props) {
               values,
               dirty,
             } = formik;
-            console.log({ values });
             return (
               <Form className="flex flex-col min-h-min w-full justify-center items-center gap-y-5">
                 {/* Label*/}

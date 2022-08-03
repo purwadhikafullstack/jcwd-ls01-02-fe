@@ -62,7 +62,6 @@ function ModalEditProduct(props) {
 
   const getDetails = async () => {
     try {
-      console.log("fetch");
       setLoading(true);
       const res = await axios.get(`${API_URL}/admin/product-details`, {
         params: { id: editId },
@@ -79,7 +78,6 @@ function ModalEditProduct(props) {
         principal,
         cara_pakai,
         peringatan,
-        stock,
         satuan,
         kemasan,
         price,
@@ -144,7 +142,6 @@ function ModalEditProduct(props) {
         ...details2,
         id: editId,
       };
-      console.log(insertData);
       let formData = new FormData();
       if (detailImage.photo.file) {
         formData.append("product_photo", detailImage.photo.file);
@@ -212,6 +209,7 @@ function ModalEditProduct(props) {
 
   useEffect(() => {
     if (editId && modalEdit) getDetails();
+    // eslint-disable-next-line
   }, [editId, modalEdit]);
 
   return (

@@ -145,8 +145,8 @@ function Products() {
                 <button
                   className="button-primary h-8 w-full"
                   onClick={() => {
-                    openModalDetails();
                     setDetailsId(val.id);
+                    openModalDetails();
                   }}
                 >
                   Detail Produk
@@ -273,6 +273,7 @@ function Products() {
         closeModalAddStock={closeModalAddStock}
         editId={editId}
         setEditId={setEditId}
+        getProducts={getProducts}
       />
       <ModalDetails
         modalDetails={modalDetails}

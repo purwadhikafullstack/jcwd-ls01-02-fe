@@ -6,6 +6,8 @@ import transaksiActiveIcon from "../../Assets/transaksi-admin-active.png";
 import API_URL from "../../Helpers/API_URL";
 import { fullDateGenerator } from "../../Helpers/dateGenerator";
 import ModalPrescriptionService from "./ModalPrescriptionService";
+import { toast } from "react-toastify";
+import formatToCurrency from "../../Helpers/formatToCurrency";
 
 function CardOrderAdmin({ data, getOrders }) {
   const [checked, setChecked] = useState(false);
@@ -18,6 +20,10 @@ function CardOrderAdmin({ data, getOrders }) {
     prescription_photo,
     expired_at,
     username,
+    selected_address,
+    shipping_method,
+    total_price,
+    pesan,
   } = data;
 
   function closeModal() {
@@ -31,13 +37,24 @@ function CardOrderAdmin({ data, getOrders }) {
   const cancelOrder = async (id) => {
     try {
       await axios.patch(`${API_URL}/transaction/order/reject?id=${id}`);
+      toast.success(`Pesanan Dibatalkan`, {
+        theme: "colored",
+        style: { backgroundColor: "#009B90" },
+      });
     } catch (error) {
       console.log(error);
     }
   };
+
   const confirmlOrder = async (id) => {
     try {
-      await axios.patch(`${API_URL}/transaction/order/confirm?id=${id}`);
+      await axios.patch(`${API_URL}/transaction/order/confirm`, {
+        transaction_code,
+      });
+      toast.success(`Pesanan Berhasil Dikonfirmasi`, {
+        theme: "colored",
+        style: { backgroundColor: "#009B90" },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +120,12 @@ function CardOrderAdmin({ data, getOrders }) {
               <div className="w-full h-full">
                 {status == "Pengecekan-Resep" && "Lakukan Pengecekan Resep"}
                 {status == "Pesanan-Diterima" &&
+                  "Menunggu Transaksi Dilanjutkan Oleh User"}
+                {status == "Menunggu-Pembayaran" &&
                   "Menunggu Pembayaran Dari User"}
+                {status == "Diproses" && "Lakukan Pengecekan Transaksi"}
+                {status == "Dikirim" && "Kurir Dalam Perjalanan"}
+                {status == "Dibatalkan" && pesan}
               </div>
             </div>
             <div className="border-r h-full" />
@@ -114,19 +136,31 @@ function CardOrderAdmin({ data, getOrders }) {
               </div>
               {status != "Pengecekan-Resep" && status != "Pesanan-Diterima" && (
                 <>
-                  <div className="w-1/3 border">Alamat</div>
-                  <div className="w-1/3 border">Kurir</div>
+                  {selected_address ? (
+                    <div className="w-1/3 flex flex-col">
+                      <h3 className="font-bold">Alamat</h3>
+                      <p className="text-sm">{selected_address}</p>
+                    </div>
+                  ) : null}
+                  {shipping_method ? (
+                    <div className="w-1/3 flex flex-col">
+                      <h3 className="font-bold">Metode Pengiriman</h3>
+                      <p className="text-sm">{shipping_method}</p>
+                    </div>
+                  ) : null}
                 </>
               )}
             </div>
           </div>
           <div className="flex justify-between items-center h-12 w-full px-5 font-bold">
-            {status != "Pengecekan-Resep" && status != "Pesanan-Diterima" && (
+            {total_price ? (
               <>
                 <div className="w-1/2">Total Harga</div>
-                <div className="w-1/2 text-right">Price</div>
+                <div className="w-1/2 text-right">
+                  {formatToCurrency(total_price)}
+                </div>
               </>
-            )}
+            ) : null}
           </div>
           <div className="flex h-8 justify-between items-center">
             <div className="h-full flex gap-x-5">
@@ -161,7 +195,7 @@ function CardOrderAdmin({ data, getOrders }) {
                   {status == "Diproses" && (
                     <button
                       className="button-primary w-1/2"
-                      onClick={() => confirmlOrder(id)}
+                      onClick={() => confirmlOrder()}
                     >
                       Terima Pesanan
                     </button>

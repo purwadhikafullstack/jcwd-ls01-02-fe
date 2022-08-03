@@ -9,7 +9,8 @@ import API_URL from "../../Helpers/API_URL";
 import Loading from "../../User/Component/Loading";
 
 function ModalAddStock(props) {
-  const { modalAddStock, closeModalAddStock, editId, setEditId } = props;
+  const { modalAddStock, closeModalAddStock, editId, setEditId, getProducts } =
+    props;
   const initialState = { name: "", no_produk: "" };
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(initialState);
@@ -37,25 +38,28 @@ function ModalAddStock(props) {
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
     const insertData = {
       product_id: editId,
       stock: values.stock,
       tgl_kadaluarsa: values.tgl_kadaluarsa,
     };
     try {
+      setLoading(true);
       await axios.post(`${API_URL}/admin/add-stock`, insertData);
       toast.success(`Produk berhasil ditambahkan`, {
         theme: "colored",
         style: { backgroundColor: "#009B90" },
       });
       onClose();
+      getProducts();
     } catch (error) {
       console.log(error);
       toast.error(error, {
         theme: "colored",
         style: { backgroundColor: "#DC2626" },
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,7 +71,6 @@ function ModalAddStock(props) {
       });
       const { name, no_produk } = res.data.data;
       setData({ name, no_produk });
-      console.log(res.data.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -135,7 +138,6 @@ function ModalAddStock(props) {
                       touched,
                       values,
                     } = formik;
-                    console.log(values);
                     return (
                       <Form>
                         {loading ? (
@@ -242,7 +244,7 @@ function ModalAddStock(props) {
                               className={`button-primary px-10 text-lg disabled:bg-gray-500 disabled:cursor-not-allowed ${""}`}
                               onClick={() => {
                                 if (!isValid)
-                                  return toast.error("Data belum lengkap!", {
+                                  return toast.error("Cek kembali data kamu!", {
                                     theme: "colored",
                                     style: { backgroundColor: "#DC2626" },
                                   });

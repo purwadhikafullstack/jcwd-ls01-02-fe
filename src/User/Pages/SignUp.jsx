@@ -448,7 +448,7 @@ function SignUp() {
                       </label>
                     </label>
                     {errors.termsCondition && touched.termsCondition && (
-                      <div className="absolute text-red-600 -bottom-4 text-sm ml-9">
+                      <div className="absolute text-red-600 -bottom-4 text-[10px] sm:text-sm ml-9">
                         {errors.termsCondition}
                       </div>
                     )}

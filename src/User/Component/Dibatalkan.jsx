@@ -22,7 +22,6 @@ function Dibatalkan({ data }) {
     expired_at,
   } = data.dataOrder;
   const { cart } = data;
-  console.log(cart);
 
   const printCartCard = () => {
     return cart.map((val, i) => {

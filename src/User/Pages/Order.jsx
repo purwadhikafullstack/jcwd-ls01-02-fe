@@ -10,6 +10,8 @@ import API_URL from "../../Helpers/API_URL";
 import Cookies from "js-cookie";
 import Loading from "../Component/Loading";
 import Dibatalkan from "../Component/Dibatalkan";
+import Dikirim from "../Component/Dikirim";
+import Selesai from "../Component/Selesai";
 
 function Order() {
   const navigate = useNavigate();
@@ -33,10 +35,6 @@ function Order() {
     } catch (error) {
       console.log(error);
       setError(true);
-      // toast.error(error.response.data.message, {
-      //   theme: "colored",
-      //   style: { backgroundColor: "#DC2626" },
-      // });
       setTimer(5);
     } finally {
       setLoading(false);
@@ -49,7 +47,6 @@ function Order() {
 
   const printPage = (data) => {
     let { status } = data.dataOrder;
-    // status = true;
     switch (status) {
       case "Pengecekan-Resep":
         return <PengecekanResep data={data} />;
@@ -63,7 +60,10 @@ function Order() {
         return <Diproses data={data} />;
       case "Dibatalkan":
         return <Dibatalkan data={data} />;
-
+      case "Dikirim":
+        return <Dikirim data={data} getOrderDetails={getOrderDetails} />;
+      case "Selesai":
+        return <Selesai data={data} />;
       default:
         return null;
     }

@@ -20,7 +20,6 @@ function Cart() {
       let res = await axios.get(`${API_URL}/transaction/getcart`, {
         headers: { authorization: token },
       });
-      // console.log(res, ">>>>>>>> RESPON GET DATA");
       const { data } = res.data;
       setProducts(data);
     } catch (error) {
