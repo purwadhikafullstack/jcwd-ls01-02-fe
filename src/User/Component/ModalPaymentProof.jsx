@@ -22,6 +22,7 @@ function ModalPaymentProof(props) {
     transaction_code,
     getOrderDetails,
   } = props;
+  console.log({ checkoutCart, id, transaction_code });
 
   const onClose = () => {
     closeModal();
